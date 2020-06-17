@@ -7,7 +7,8 @@ const {
 const sendTemplate = require('./postmark/sendTemplate');
 const validate = require('./validation/validation');
 
-const mergeEmailField = requiredFields => compose(mergeLeft(requiredFields), objOf('to'), prop('email'));
+const getEmailField = x => x.email || x.Email;
+const mergeEmailField = requiredFields => compose(mergeLeft(requiredFields), objOf('To'), getEmailField);
 
 const app = express();
 app.use(setCors, parseHeaders, express.json(), express.urlencoded({ extended: true }));
@@ -21,7 +22,7 @@ app.post('/', (req, res) => {
 
     // convert form's email field into To field that is required by Postmark's template API
     const requiredFields = mergeEmailField(res.locals)(formEntries);
-    console.log('requiredFields:', requiredFields);
+    // console.log('requiredFields:', requiredFields);
 
     // validate
 
@@ -33,7 +34,6 @@ app.post('/', (req, res) => {
     console.log(error);
 
     // return error notice
-    
   }
 
   return res.sendStatus(200);
