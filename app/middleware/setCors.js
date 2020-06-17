@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
   }
 
   res.set('Access-Control-Allow-Methods', 'GET, POST');
-  res.set('Access-Control-Allow-Headers', 'Content-Type, Template-Id, From-Email');
+  res.set('Access-Control-Allow-Headers', 'Content-Type, Template-Id, From-Email, To-Email');
   // cache preflight response for 3600s
   res.set('Access-Control-Max-Age', '3600');
 
