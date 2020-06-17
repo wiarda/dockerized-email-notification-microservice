@@ -23,6 +23,6 @@ const parseTemplateOptions = (requiredFields, formEntries) => mergeLeft(required
  */
 const send = templateOptions => client.sendEmailWithTemplate(templateOptions);
 
-const sendTemplate = compose(send, x => (console.log(x), x), parseTemplateOptions);
+const sendTemplate = compose(send, parseTemplateOptions);
 
 module.exports = sendTemplate;

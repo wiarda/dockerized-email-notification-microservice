@@ -13,7 +13,7 @@ const mergeEmailField = requiredFields => compose(mergeLeft(requiredFields), obj
 const app = express();
 app.use(setCors, parseHeaders, express.json(), express.urlencoded({ extended: true }));
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
   console.log('request received');
 
   try {
@@ -22,21 +22,17 @@ app.post('/', (req, res) => {
 
     // convert form's email field into To field that is required by Postmark's template API
     const requiredFields = mergeEmailField(res.locals)(formEntries);
-    // console.log('requiredFields:', requiredFields);
 
     // validate
 
-    // TODO: switch to async
-    return sendTemplate(requiredFields, formEntries);
-
-    // return
+    await sendTemplate(requiredFields, formEntries);
+    
+    res.status(200)
+    return res.send({ message: 'OK' });
   } catch (error) {
     console.log(error);
-
-    // return error notice
+    return res.send({ status: 400, error })
   }
-
-  return res.sendStatus(200);
 });
 
 module.exports = app;
