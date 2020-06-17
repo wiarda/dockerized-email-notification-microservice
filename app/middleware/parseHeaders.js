@@ -6,6 +6,7 @@ function parseHeaders(req, res, next) {
       headers: {
         'template-id': templateId,
         'from-email': fromEmail,
+        'to-email': toEmail,
         origin
       }
     } = req;
@@ -14,6 +15,8 @@ function parseHeaders(req, res, next) {
     res.locals.TemplateId = templateId;
     res.locals.From = fromEmail;
     res.locals.origin = origin;
+    
+    if (toEmail !== undefined) res.locals.To = toEmail;
   } catch (err) {
     console.error('Failed extract template information from headers.');
   }
