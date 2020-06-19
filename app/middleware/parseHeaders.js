@@ -18,7 +18,7 @@ function parseHeaders(req, res, next) {
     
     if (toEmail !== undefined) res.locals.To = toEmail;
   } catch (err) {
-    console.error('Failed extract template information from headers.');
+    return res.send({ status: 400, err: 'Bad request: No template information provided in headers.' });
   }
 
   next();
