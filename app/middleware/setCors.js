@@ -1,11 +1,10 @@
-const ALLOWED_ORIGINS = [
-  'http://localhost:8000',
-];
+require('dotenv').config();
+const { ALLOWED_ORIGIN } = process.env;
 
 module.exports = (req, res, next) => {
   const origin = req.headers.origin;
 
-  if (ALLOWED_ORIGINS.includes(origin)) {
+  if (ALLOWED_ORIGIN === origin) {
     res.set('Access-Control-Allow-Origin', origin);
     res.set('Access-Control-Allow-Credentials', true);
   } else {
