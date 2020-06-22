@@ -1,0 +1,6 @@
+node_modules/
+.git/
+__tests__/
+*.spec.js
+README.md
+.env.example
