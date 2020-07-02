@@ -1,5 +1,4 @@
 function parseHeaders(req, res, next) {
-  console.log(req.headers);
 
   try {
     const {

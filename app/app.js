@@ -24,7 +24,7 @@ app.post('/', async (req, res) => {
     res.status(200)
     return res.send({ message: 'OK' });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     // TODO: Split out error types
     return res.send({ status: 400, error })
   }
